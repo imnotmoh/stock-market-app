@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="nav_bar">
+    <h1>STEADY <br> GRINDING</h1>
+    <form method="post" action="{{url_for('home')}}" class="search-form", novalidate>
+    <div>
+        {{ form.csrf_token }}
+    {{form.search}}
+    {{form.submit(class='submit-search')}}
+    </div>
+    
+     
+    </form>
+    <div class="state">
+    {%if user.is_authenticated%}
+    <a href="{{url_for('log_out')}}" style="text-decoration: none; color: black;"><h2>Logout</h2></a>
+    {%else%}
+    <a href="{{url_for('login')}}" style="text-decoration: none; color: black;"><h2>Login</h2></a>
+    <a href="{{url_for('sign_up')}}" style="text-decoration: none; color: black;"><h2>Sign up</h2></a>
+    {%endif%}
+    </div>
+    </div>
+    
+    {%if not user.is_authenticated%}
+    <h1 class="info">please sign in to access your portfolio</h1>
+    {%endif%}
+    {%if stocks != [] %}
+    <h2 id="portfolio">portfolio</h2>
+    <div class="card-deck">
+        <!-- create card for each stock -->
+    {%for stock in stocks%}
+    <div class="card-container">
+    <div class="stock-card" >
+        <div class="card-headers">
+            <h2 class="stock-name">{{stock.get('symbol')}}</h2>
+            <h2 class="stock-price">{{stock.get('open')}}</h2>
+            {%if 0 > stock.get('percent')%}
+            <h3 class="percent" style="color: red;">%{{(-1 * stock.get('percent'))}}</h3>
+            {%else%}
+            <h3 class="percent" style="color: green;">%{{stock.get('percent')}}</h3>
+            {%endif%}
+        </div>
+        <div class="card-bodies">
+            <ul>
+                <li>Open: {{stock.get('open')}}</li>
+                <li>Close: {{stock.get('close')}}</li>
+                <li>High: {{stock.get('high')}}</li>
+                <li>Low: {{stock.get('low')}}</li>
+                <li>Volume: {{stock.get('volume')}}</li>
+                <li>Dividend: {{stock.get('dividend')}}</li>
+            </ul>
+            <ul>
+                <li>Adjusted OPen: {{stock.get('adj_open')}}</li>
+                <li>Adjusted Close: {{stock.get('adj_close')}}</li>
+                <li>Adjusted High: {{stock.get('adj_high')}}</li>
+                <li>Adjusted Low: {{stock.get('adj_low')}}</li>
+                <li>Adjusted Volume: {{stock.get('adj_volume')}}</li>
+            </ul>
+            
+
+        </div>
+        <p class="date">{{stock.get('date')}}</p>
+        
+
+    </div>
+    </div>
+    {%endfor%}
+    {%else%}
+    <h1 class="info">hello {{user.user_name}},your portfolio is empty</h1>
+    {%endif%}
+    
+    
+    
+    </div>
+<!-- pop up modal to show result -->
+{%if result !=  None%}
+<script>
+    $(document).ready(function () {
+        $('#staticBackdrop').modal('show');
+    });
+    
+</script>
+
+<div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="stock-card" id="result-card">
+            <div class="card-headers">
+                <h2 class="stock-name">{{result.get('symbol')}}</h2>
+                <h2 class="stock-price">{{result.get('close')}}</h2>
+                {%if 0 > result.get('percent')%}
+                <h3 class="percent" style="color: red;">%{{(-1 * result.get('percent'))}}</h3>
+                {%else%}
+                <h3 class="percent" style="color: green;">%{{result.get('percent')}}</h3>
+                {%endif%}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="card-bodies">
+                <ul>
+                    <li>Open: {{result.get('open')}}</li>
+                    <li>Close: {{result.get('close')}}</li>
+                    <li>High: {{result.get('high')}}</li>
+                    <li>Low: {{result.get('low')}}</li>
+                    <li>Volume: {{result.get('volume')}}</li>
+                    <li>Dividend: {{result.get('dividend')}}</li>
+                </ul>
+                <ul>
+                    <li>Adjusted OPen: {{result.get('adj_open')}}</li>
+                    <li>Adjusted Close: {{result.get('adj_open')}}</li>
+                    <li>Adjusted High: {{result.get('adj_open')}}</li>
+                    <li>Adjusted Low: {{result.get('adj_open')}}</li>
+                    <li>Adjusted Volume: {{result.get('adj_open')}}</li>
+                </ul>
+        
+        
+            </div>
+            <div class="foot-div">
+            <p class="date">{{result.get('date')}}</p>
+            <button type="button" class="btn", id="Add", data-symbol="{{result.get('symbol')}}">Add</button>
+            </div>
+            <script>
+                const addButton = document.getElementById('Add');
+// make request to add a card
+if (addButton) {
+    const symbol = addButton.getAttribute('data-symbol');
+    console.log(symbol);
+    addButton.addEventListener('click', () => {
+        fetch('/add/'+symbol)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                window.location.href ='/'
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('There was a problem with the network request:', error);
+            });
+    });
+} else {
+    console.log('Data symbol is null');
+}
+            </script>
+        </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+{% endif %}
+
+    
+</body>
+</html>

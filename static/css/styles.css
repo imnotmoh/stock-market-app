@@ -1,0 +1,281 @@
+@font-face {
+    font-family: 'Horizon';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Tangerine'), url('/Users/macbook/Downloads/Horizon-Font/Horizon') format('truetype');
+}
+
+h1 {
+    font-family: 'Archivo Black', sans-serif;
+
+}
+
+
+
+body {
+    padding: 20px 90px;
+}
+
+.form-div {
+    margin: auto;
+
+    padding: 15px 20px;
+    width: 23%;
+    height: 40%;
+    background-color: lightgray;
+    border-radius: 3%;
+
+}
+
+.nav_bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.nav_bar h1 {
+    text-align: center;
+    margin-left: 60px;
+}
+
+.nav_bar h2 {
+    font-family: 'Alexandria', sans-serif;
+    margin-top: 27px;
+    margin-left: 60px;
+    font-size: xx-large;
+
+}
+
+.state{
+    display: flex;
+    flex-direction: row;
+}
+
+.submit-search {
+    display: none;
+}
+
+#portfolio {
+    margin-left: 110px;
+}
+
+.search-form input {
+    height: 70px;
+    border-radius: 70px;
+    width: 600px;
+    border-style: solid;
+    outline: none;
+    border-color: black;
+    padding-left: 80px;
+    font-size: 50px;
+
+}
+
+.search-form {
+    margin-top: 15px;
+    margin-left: 250px;
+}
+
+.search-form div {
+    position: relative;
+}
+
+.search-form div::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    width: 40px;
+    height: 40px;
+    background-image: url(../magnifying-glass-solid.svg);
+}
+
+#submit {
+    background-color: #00ffab;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.form-page-logo {
+    margin-top: 100px;
+    text-align: center;
+
+}
+
+form p {
+    color: red;
+    margin-bottom: 5px;
+}
+
+.form-div p {
+    margin-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+.stock-card {
+    background-color: #00ffab;
+    border-radius: 30px;
+    height: 400px;
+    width: 95%;
+    
+}
+
+.card-headers{
+    font-family: 'Alexandria', sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    padding-top: 50px;
+    gap: 80px;
+    margin-left: 80px;
+}
+
+.stock-price {
+    font-family: 'Archivo Black', sans-serif;
+
+}
+
+.card-bodies {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin-left: 50px;
+}
+
+.card-bodies ul{
+    list-style: none;
+    font-size: 21px;
+    line-height: 1.7;
+}
+
+.stock-card p {
+    font-size: xx-large;
+    font-family: 'Alexandria', sans-serif;
+    font-weight: 400;
+    margin-left: 70px;
+    
+}
+
+#result-card{
+    width: 100%;
+}
+#result-card .card-headers {
+    margin-top: 0;
+}
+#result-card .foot-div button {
+    margin: auto 0;
+    padding: 0 50px;
+    height: 30px;
+    color: #00ffab;
+    background-color: aliceblue;
+    border: none;
+}
+
+#result-card .foot-div {
+    justify-content: space-between;
+    padding-right: 50px;
+}
+.modal {
+    width: 800px;
+    height: 400px;
+    border-radius: 60px;
+}
+
+.foot-div {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.card-deck {
+    display: flex;
+    flex-direction: row;
+    flex: 50%;
+    flex-wrap: wrap;
+}
+
+.card-container {
+    display: inline-block;
+    width: 50%;
+}
+
+@media screen and (max-width: 1300px) {
+.card-deck {
+        display: block;
+    }
+.card-container {
+    display: inline-block;
+    width: 100%;
+}
+}
+
+
+
+@media screen and (max-width: 1400px) {
+    .search-form {
+        margin-left: 50px;
+    }
+
+    body {
+        padding: 20px 20px;
+    }
+}
+
+
+
+
+@media screen and (max-width: 1210px) {
+    .nav_bar {
+        display: block;
+        
+    }
+
+    .search-form { 
+        margin-left: 60px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .nav_bar h1 {
+        text-align: left;
+        right: 500px;
+    }
+    #portfolio {
+        margin-left: 60px;
+    }
+    .state {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    body {
+        padding: 0;
+    }
+
+        .state {
+            position: absolute;
+            right: 20px;
+            top: 0;
+        }
+
+    .search-form {
+        width: 100%;
+        margin: auto;
+    }
+
+    #portfolio {
+        margin-left: 10px;
+    }
+}
+
+.info {
+    color: rgb(228, 224, 224);
+    margin: auto;
+    padding-top: 300px;
+}
